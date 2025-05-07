@@ -36,8 +36,8 @@ namespace FluxTool_CleanerSystem_K4_3
         private void btnOK_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(textBox_User.Text) ||
-                string.IsNullOrWhiteSpace(textBox_LotNo.Text) ||
-                string.IsNullOrWhiteSpace(textBox_MC.Text) ||
+                //string.IsNullOrWhiteSpace(textBox_LotNo.Text) ||
+                //string.IsNullOrWhiteSpace(textBox_MC.Text) ||
                 string.IsNullOrWhiteSpace(textBox_ToolID.Text))
             {
                 MessageBox.Show($"Tool 정보를 입력해 주세요", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -54,9 +54,9 @@ namespace FluxTool_CleanerSystem_K4_3
                     MessageBox.Show($"User 정보가 잘못 입력되었습니다", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-
+                
                 sInputText = textBox_LotNo.Text.ToString();
-                if (sInputText.EndsWith(";"))
+                if ((sInputText.EndsWith(";")) || (sInputText == string.Empty))
                 {
                     Define.ToolInfoRegist_Lot[iCH] = textBox_LotNo.Text.ToString();
                 }
@@ -67,7 +67,7 @@ namespace FluxTool_CleanerSystem_K4_3
                 }
 
                 sInputText = textBox_MC.Text.ToString();
-                if (sInputText.Length >= 2 && sInputText.Contains("-"))
+                if ((sInputText.Length >= 2 && sInputText.Contains("-")) || (sInputText == string.Empty))
                 {
                     Define.ToolInfoRegist_MC[iCH] = textBox_MC.Text.ToString();
                 }
@@ -76,7 +76,7 @@ namespace FluxTool_CleanerSystem_K4_3
                     MessageBox.Show($"M/C# 정보가 잘못 입력되었습니다", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
-
+                
                 sInputText = textBox_ToolID.Text.ToString();
                 if ((sInputText.Length >= 5 && sInputText.Contains("-")) ||
                      (sInputText.Length >= 5 && sInputText.Contains(";")))
